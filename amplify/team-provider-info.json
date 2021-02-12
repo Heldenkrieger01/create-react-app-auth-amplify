@@ -18,7 +18,7 @@
       "function": {
         "createreactappauthamplify6d4435aa": {
           "deploymentBucketName": "amplify-authcra-devt-82135-deployment",
-          "s3Key": "amplify-builds/createreactappauthamplify6d4435aa-6d3766436d5850306756-build.zip"
+          "s3Key": "amplify-builds/createreactappauthamplify6d4435aa-547270577150592f6442-build.zip"
         }
       }
     }

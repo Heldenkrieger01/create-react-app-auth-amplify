@@ -39,7 +39,7 @@ const ImagePicker = () => {
             });
             reader.readAsDataURL(file)
             // Todo: handle AWS Service
-            Storage.put(filename, "test test eins zwo")
+            Storage.put(filename, file)
                 .then(result => console.log(result))
                 .catch(err => console.log("Error: ", err))
         }
