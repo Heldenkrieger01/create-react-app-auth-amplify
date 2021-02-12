@@ -1,29 +1,38 @@
-import React, { Component } from 'react';
+import React, { PropTypes, Component, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { withAuthenticator } from 'aws-amplify-react'
-import Amplify, { Auth } from 'aws-amplify';
+import { withAmazon, withAuthenticator, withGoogle } from 'aws-amplify-react'
+import Amplify, { Auth, Storage } from 'aws-amplify';
 import aws_exports from './aws-exports';
+import { render } from 'react-dom';
+import ImagePicker from "./ImagePicker"
 Amplify.configure(aws_exports);
 
 class App extends Component {
+  constructor(props) {
+    super();
+    this.state = { buttonText: "Upload" }
+  }
+
+  upload = e => {
+    this.setState({ buttonText: "Success" })
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          <h1>
+            Image Categorizer Web App
+          </h1>
+          <hr className="title-line"/>
         </header>
+        <body className="App-body">
+          <h2>
+            Upload image for categorization (jpg only)
+          </h2>
+          <ImagePicker />
+        </body>
       </div>
     );
   }
