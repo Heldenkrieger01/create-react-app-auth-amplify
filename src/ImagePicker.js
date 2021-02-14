@@ -9,6 +9,7 @@ const ImagePicker = () => {
   const [imgData, setImgData] = useState(null);
   const inputFile = useRef(null);
   const [uploadResult, setUploadResult] = useState("")
+  const [predictionResult, setPredictionResult] = useState("")
 
   const onDrop = useCallback(acceptedFiles => {
     console.log(acceptedFiles[0])
@@ -73,7 +74,7 @@ const ImagePicker = () => {
           {uploadResult}
         </div>
         <div className="upload-predictions">
-
+          {predictionResult}
         </div>
       </div>
       <div>
