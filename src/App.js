@@ -25,17 +25,45 @@ class App extends Component {
           <h1>
             Image Categorizer Web App
           </h1>
-          <hr className="title-line"/>
+          <hr className="title-line" />
         </header>
         <body className="App-body">
           <h2>
             Upload image for categorization (jpg only)
           </h2>
           <ImagePicker />
+          <button onClick={download_hut}>
+            Download landscape.jpg
+          </button>
         </body>
       </div>
     );
   }
+}
+
+function download_hut(e) {
+  const creds = Auth.currentCredentials()
+  console.log(creds)
+  console.log(Storage.list('', { level: 'public' }))
+  Storage.get('landscape.jpg', { download: true, level: 'public' })
+    .then(res => downloadBlob(res.Body, 'downscape.jpg'))
+    .catch(err => console.log(err))
+}
+
+function downloadBlob(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename || 'download';
+  const clickHandler = () => {
+    setTimeout(() => {
+      URL.revokeObjectURL(url);
+      a.removeEventListener('click', clickHandler);
+    }, 150);
+  };
+  a.addEventListener('click', clickHandler, false);
+  a.click();
+  return a;
 }
 
 export default withAuthenticator(App, true);
