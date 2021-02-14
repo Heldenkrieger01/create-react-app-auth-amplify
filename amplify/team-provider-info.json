@@ -18,7 +18,15 @@
       "function": {
         "createreactappauthamplify6d4435aa": {
           "deploymentBucketName": "amplify-authcra-devt-82135-deployment",
-          "s3Key": "amplify-builds/createreactappauthamplify6d4435aa-547270577150592f6442-build.zip"
+          "s3Key": "amplify-builds/createreactappauthamplify6d4435aa-6e744c57644354777865-build.zip"
+        },
+        "createLabelAllocationItems": {
+          "deploymentBucketName": "amplify-authcra-devt-82135-deployment",
+          "s3Key": "amplify-builds/createLabelAllocationItems-6349744b546178642b41-build.zip"
+        },
+        "amplifyImageClassification": {
+          "deploymentBucketName": "amplify-authcra-devt-82135-deployment",
+          "s3Key": "amplify-builds/amplifyImageClassification-636a3658507a78337264-build.zip"
         }
       }
     }
