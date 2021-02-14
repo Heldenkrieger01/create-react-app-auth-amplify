@@ -8,6 +8,7 @@ const ImagePicker = () => {
     const [image, setImage] = useState("");
     const [imgData, setImgData] = useState(null);
     const inputFile = useRef(null);
+    const [uploadResult, setUploadResult] = useState("")
 
     const onDrop = useCallback(acceptedFiles => {
         console.log(acceptedFiles[0])
@@ -28,6 +29,7 @@ const ImagePicker = () => {
     };
 
     const fileUpload = file => {
+        setUploadResult("")
         const filename = file.name;
         var parts = filename.split(".");
         const fileType = parts[parts.length - 1];
@@ -40,11 +42,11 @@ const ImagePicker = () => {
             reader.readAsDataURL(file)
             // Todo: handle AWS Service
             Storage.put(filename, file)
-                .then(result => console.log(result))
-                .catch(err => console.log("Error: ", err))
+                .then(() => setUploadResult("Upload successfull!"))
+                .catch(() => setUploadResult("Upload failed!"))
         }
         else
-            console.log("not an image!!!")
+            setUploadResult("Please select an image!")
     }
 
     const onButtonClick = () => {
@@ -65,6 +67,9 @@ const ImagePicker = () => {
                 />
                 <div className="upload-button" onClick={onButtonClick}>
                     Upload
+                </div>
+                <div className={uploadResult === "" ? "hidden" : "upload-message"}>
+                    {uploadResult}
                 </div>
             </div>
             <div>

@@ -35,6 +35,10 @@
   background: linear-gradient(to bottom, #ffad33 5%, #ffad33 100%);
 }
 
+.upload-message {
+  margin-top: 8px
+}
+
 .upload-image {
   width: 25%;
   height: auto;
@@ -56,4 +60,8 @@
   width: 75%;
   padding: 20px;
   display: inline-block;
+}
+
+.hidden {
+  display: none;
 }

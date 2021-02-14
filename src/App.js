@@ -42,15 +42,14 @@ class App extends Component {
 }
 
 function download_hut(e) {
-  const creds = Auth.currentCredentials()
-  console.log(creds)
   console.log(Storage.list('', { level: 'public' }))
   Storage.get('landscape.jpg', { download: true, level: 'public' })
     .then(res => downloadBlob(res.Body, 'downscape.jpg'))
     .catch(err => console.log(err))
 }
 
-function downloadBlob(blob, filename) {
+function downloadBlob(data, filename) {
+  const blob = new Blob([data])
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
