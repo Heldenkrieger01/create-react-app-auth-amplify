@@ -6,6 +6,7 @@ import Amplify, { Auth, Storage } from 'aws-amplify';
 import aws_exports from './aws-exports';
 import { render } from 'react-dom';
 import ImagePicker from "./ImagePicker"
+import Stats from "./Stats"
 Amplify.configure(aws_exports);
 
 class App extends Component {
@@ -29,9 +30,13 @@ class App extends Component {
         </header>
         <body className="App-body">
           <h2>
-            Upload image for categorization (jpg only)
+            Upload image for categorization (jpg, png)
           </h2>
           <ImagePicker />
+          <h2>
+            Stats for the Iamge Classifier 6000
+          </h2>
+          <Stats />
         </body>
       </div>
     );

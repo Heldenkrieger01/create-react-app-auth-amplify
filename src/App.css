@@ -52,6 +52,11 @@
   width: 80%;
 }
 
+.stat-div {
+  width: 75%;
+  display: inline-block;
+}
+
 .dropzone {
   border-width: 2px;
   border-color: #eeeeee;
