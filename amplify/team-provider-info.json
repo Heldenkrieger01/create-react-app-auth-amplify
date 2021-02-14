@@ -26,7 +26,11 @@
         },
         "amplifyImageClassification": {
           "deploymentBucketName": "amplify-authcra-devt-82135-deployment",
-          "s3Key": "amplify-builds/amplifyImageClassification-636a3658507a78337264-build.zip"
+          "s3Key": "amplify-builds/amplifyImageClassification-4275764974537561684f-build.zip"
+        },
+        "amplifyCreateLabelAllocationItems": {
+          "deploymentBucketName": "amplify-authcra-devt-82135-deployment",
+          "s3Key": "amplify-builds/amplifyCreateLabelAllocationItems-7669376c364e69466c59-build.zip"
         }
       }
     }
