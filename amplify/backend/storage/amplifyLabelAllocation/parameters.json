@@ -1,0 +1,5 @@
+{
+    "tableName": "amplifyLabelAllocation",
+    "partitionKeyName": "label",
+    "partitionKeyType": "S"
+}
