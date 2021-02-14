@@ -1,8 +1,10 @@
-import Amplify, { Predictions, Storage } from "aws-amplify";
+import Amplify, { Storage } from "aws-amplify";
+import Predictions, { AmazonAIPredictionsProvider } from '@aws-amplify/predictions'
 import React, { useState, useRef, useCallback } from "react";
 import { useDropzone } from 'react-dropzone'
 import aws_exports from './aws-exports';
 Amplify.configure(aws_exports);
+Amplify.addPluggable(new AmazonAIPredictionsProvider())
 
 const ImagePicker = () => {
   const [image, setImage] = useState("");
@@ -46,15 +48,22 @@ const ImagePicker = () => {
         .then(() => setUploadResult("Upload successfull!"))
         .catch(() => setUploadResult("Upload failed!"))
       Predictions.identify({
-        entities: {
+        labels: {
           source: {
-            key: filename
-          }
+            file,
+          },
+          type: "ALL"
         }
       })
+      .then(response => handlePredictionResult(response))
+      .catch(error => console.log(error))
     }
     else
       setUploadResult("Please select an image!")
+  }
+
+  const handlePredictionResult = result => {
+    setPredictionResult(result?.labels[0].name)
   }
 
   const onButtonClick = () => {
@@ -79,14 +88,14 @@ const ImagePicker = () => {
         <div className={uploadResult === "" ? "hidden" : "upload-message"}>
           {uploadResult}
         </div>
-        <div className="upload-predictions">
-          {predictionResult}
-        </div>
       </div>
       <div>
         <p className="upload-break" />
         <img className="upload-image" src={imgData} />
       </div>
+      <div className={predictionResult === "" ? "hidden" : "upload-predictions"}>
+          {predictionResult}
+        </div>
     </div>
   );
 };

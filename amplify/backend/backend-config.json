@@ -65,7 +65,7 @@
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "createreactappauthamplify6d4435aa",
+          "resourceName": "amplifyImageClassification",
           "attributes": [
             "Name",
             "Arn",
@@ -77,6 +77,14 @@
     "amplifyLabelAllocation": {
       "service": "DynamoDB",
       "providerPlugin": "awscloudformation"
+    }
+  },
+  "predictions": {
+    "identifyLabels4718060e": {
+      "providerPlugin": "awscloudformation",
+      "service": "Rekognition",
+      "dependsOn": [],
+      "identifyType": "identifyLabels"
     }
   }
 }
