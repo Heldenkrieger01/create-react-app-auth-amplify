@@ -32,37 +32,10 @@ class App extends Component {
             Upload image for categorization (jpg only)
           </h2>
           <ImagePicker />
-          <button onClick={download_hut}>
-            Download landscape.jpg
-          </button>
         </body>
       </div>
     );
   }
-}
-
-function download_hut(e) {
-  console.log(Storage.list('', { level: 'public' }))
-  Storage.get('landscape.jpg', { download: true, level: 'public' })
-    .then(res => downloadBlob(res.Body, 'downscape.jpg'))
-    .catch(err => console.log(err))
-}
-
-function downloadBlob(data, filename) {
-  const blob = new Blob([data])
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = filename || 'download';
-  const clickHandler = () => {
-    setTimeout(() => {
-      URL.revokeObjectURL(url);
-      a.removeEventListener('click', clickHandler);
-    }, 150);
-  };
-  a.addEventListener('click', clickHandler, false);
-  a.click();
-  return a;
 }
 
 export default withAuthenticator(App, true);
