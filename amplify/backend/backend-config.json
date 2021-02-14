@@ -71,29 +71,12 @@
             "Arn",
             "LambdaExecutionRole"
           ]
-        },
-        {
-          "category": "function",
-          "resourceName": "amplifyImageClassification",
-          "attributes": [
-            "Name",
-            "Arn",
-            "LambdaExecutionRole"
-          ]
         }
       ]
     },
     "amplifyLabelAllocation": {
       "service": "DynamoDB",
       "providerPlugin": "awscloudformation"
-    }
-  },
-  "predictions": {
-    "identifyEntities9dea7a55": {
-      "providerPlugin": "awscloudformation",
-      "service": "Rekognition",
-      "dependsOn": [],
-      "identifyType": "identifyEntities"
     }
   }
 }

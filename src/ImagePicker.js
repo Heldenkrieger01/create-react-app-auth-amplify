@@ -1,4 +1,4 @@
-import Amplify, { Storage } from "aws-amplify";
+import Amplify, { Predictions, Storage } from "aws-amplify";
 import React, { useState, useRef, useCallback } from "react";
 import { useDropzone } from 'react-dropzone'
 import aws_exports from './aws-exports';
@@ -45,7 +45,13 @@ const ImagePicker = () => {
       Storage.put(filename, file)
         .then(() => setUploadResult("Upload successfull!"))
         .catch(() => setUploadResult("Upload failed!"))
-
+      Predictions.identify({
+        entities: {
+          source: {
+            key: filename
+          }
+        }
+      })
     }
     else
       setUploadResult("Please select an image!")
