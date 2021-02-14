@@ -7,22 +7,22 @@ Amplify.configure(aws_exports);
 
 const Stats = () => {
 
-    return (
-        <div className="stat-div">
-            <Tabs>
-                <TabList>
-                    <Tab>Global</Tab>
-                    <Tab>Personal</Tab>
-                </TabList>
-                <TabPanel>
-                    The global stats
+  return (
+    <div className="stat-div">
+      <Tabs>
+        <TabList>
+          <Tab>Global</Tab>
+          <Tab>Personal</Tab>
+        </TabList>
+        <TabPanel>
+          The global stats
             </TabPanel>
-                <TabPanel>
-                    Your personal stats
+        <TabPanel>
+          Your personal stats
             </TabPanel>
-            </Tabs>
-        </div>
-    );
+      </Tabs>
+    </div>
+  );
 }
 
 export default Stats;
