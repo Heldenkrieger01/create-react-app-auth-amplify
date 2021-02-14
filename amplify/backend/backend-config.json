@@ -71,15 +71,6 @@
             "Arn",
             "LambdaExecutionRole"
           ]
-        },
-        {
-          "category": "function",
-          "resourceName": "amplifyImageClassification",
-          "attributes": [
-            "Name",
-            "Arn",
-            "LambdaExecutionRole"
-          ]
         }
       ]
     },
