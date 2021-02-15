@@ -207,8 +207,7 @@
                 "dynamodb:Scan",
                 "dynamodb:Query",
                 "dynamodb:Update*",
-                "dynamodb:RestoreTable*",
-                "dynamodb:Delete*"
+                "dynamodb:RestoreTable*"
               ],
               "Resource": [
                 {

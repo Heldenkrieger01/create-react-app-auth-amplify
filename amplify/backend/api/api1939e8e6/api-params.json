@@ -1,10 +1,30 @@
 {
     "paths": [
         {
+            "name": "/stats",
+            "lambdaFunction": "writeStatsFunction",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH"
+                ]
+            },
+            "policyResourceName": "/stats"
+        },
+        {
             "name": "/mjc/{userid}",
             "lambdaFunction": "createreactappauthamplify6d4435aa",
             "privacy": {
-                "open": true
+                "private": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH"
+                ]
             },
             "policyResourceName": "/mjc/*"
         }
@@ -13,16 +33,27 @@
     "apiName": "api1939e8e6",
     "functionArns": [
         {
+            "lambdaFunction": "writeStatsFunction"
+        },
+        {
             "lambdaFunction": "createreactappauthamplify6d4435aa"
         }
     ],
     "privacy": {
-        "auth": 0,
+        "auth": 2,
         "unauth": 0,
         "authRoleName": "amplify-authcra-devt-82135-authRole",
         "unAuthRoleName": "amplify-authcra-devt-82135-unauthRole"
     },
     "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "writeStatsFunction",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        },
         {
             "category": "function",
             "resourceName": "createreactappauthamplify6d4435aa",
@@ -31,5 +62,6 @@
                 "Arn"
             ]
         }
-    ]
+    ],
+    "uuid": "5358f706"
 }

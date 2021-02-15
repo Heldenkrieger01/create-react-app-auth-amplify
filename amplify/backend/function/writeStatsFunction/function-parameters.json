@@ -4,8 +4,7 @@
       "statistics": [
         "create",
         "read",
-        "update",
-        "delete"
+        "update"
       ]
     }
   },

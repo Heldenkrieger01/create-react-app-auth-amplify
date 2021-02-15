@@ -49,6 +49,14 @@
       "dependsOn": [
         {
           "category": "function",
+          "resourceName": "writeStatsFunction",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
           "resourceName": "createreactappauthamplify6d4435aa",
           "attributes": [
             "Name",
