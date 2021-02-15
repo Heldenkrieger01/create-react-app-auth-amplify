@@ -34,7 +34,11 @@
         },
         "writeStatsFunction": {
           "deploymentBucketName": "amplify-authcra-devt-82135-deployment",
-          "s3Key": "amplify-builds/writeStatsFunction-2b686c55676d3833504e-build.zip"
+          "s3Key": "amplify-builds/writeStatsFunction-3672464a4b556a324a49-build.zip"
+        },
+        "updateArchiveWithFeedback": {
+          "deploymentBucketName": "amplify-authcra-devt-82135-deployment",
+          "s3Key": "amplify-builds/updateArchiveWithFeedback-4a5175364f35616d4e4f-build.zip"
         }
       }
     }

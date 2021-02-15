@@ -1,11 +1,14 @@
 import Amplify, { API, Storage, Auth } from "aws-amplify";
 import Predictions, { AmazonAIPredictionsProvider } from '@aws-amplify/predictions'
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useImperativeHandle } from "react";
 import { useDropzone } from 'react-dropzone'
 import aws_exports from './aws-exports';
 import { v4 as uuidv4} from 'uuid';
 Amplify.configure(aws_exports);
 Amplify.addPluggable(new AmazonAIPredictionsProvider())
+
+//hook is async and does not work... sadly
+var global_name = "";
 
 const ImagePicker = () => {
   const [image, setImage] = useState("");
@@ -13,6 +16,7 @@ const ImagePicker = () => {
   const inputFile = useRef(null);
   const [uploadResult, setUploadResult] = useState("")
   const [predictionResult, setPredictionResult] = useState("")
+  const [feedbackGiven, setFeedbackGiven] = useState(false)
 
   const onDrop = useCallback(acceptedFiles => {
     console.log(acceptedFiles[0])
@@ -32,11 +36,11 @@ const ImagePicker = () => {
     }
   };
 
-  const fileUpload = file => {
-    Auth.currentUserCredentials()
-      .then(result => console.log(result.data.IdentityId))
+  const fileUpload = (file) => {
     setUploadResult("")
     setPredictionResult("")
+    setFeedbackGiven(false)
+    global_name = ""
     var filename = file.name;
     var parts = filename.split(".");
     const fileType = parts[parts.length - 1];
@@ -45,6 +49,7 @@ const ImagePicker = () => {
       parts[0] = parts[0].concat("-")
       parts[0] = parts[0].concat(uniqueid)
       var unique_filename = parts.join('.')
+      global_name = unique_filename
       setImage(file);
       const reader = new FileReader();
       reader.addEventListener("load", () => {
@@ -52,8 +57,8 @@ const ImagePicker = () => {
       });
       reader.readAsDataURL(file)
       // Todo: handle AWS Service
-      Storage.put(unique_filename, file, {level: 'private'})
-        .then(() => setUploadResult("Upload successfull!"))
+      Storage.put(global_name, file, {level: 'private'})
+        .then(() => handleUploadSuccess())
         .catch(() => setUploadResult("Upload failed!"))
       Predictions.identify({
         labels: {
@@ -70,6 +75,21 @@ const ImagePicker = () => {
       setUploadResult("Please select an image!")
   }
 
+  const handleUploadSuccess = () => {
+    setUploadResult("Upload successfull!")
+    Auth.currentCredentials().then(res => {
+      console.log(res.data.IdentityId)
+      API.post("api1939e8e6", "/archive", {
+        body: {
+          user: res.data.IdentityId,
+          filename: global_name,
+        }
+      })
+        .then(result => console.log(result.body))
+        .catch(err => console.log(err.body))
+    })
+  }
+
   const handlePredictionResult = result => {
     if (result?.labels.length > 0)
       setPredictionResult(result.labels[0].name)
@@ -80,21 +100,29 @@ const ImagePicker = () => {
   };
 
   const onCorrectClick = () => {
+    setFeedbackGiven(true)
     connectToApi(true)
   }
 
   const onWrongClick = () => {
+    setFeedbackGiven(true)
     connectToApi(false)
   }
 
   const connectToApi = isAccurate => {
-    var api = API.createInstance()
-    console.log(api)
-    var ep = API.endpoint("api1939e8e6")
-    console.log(ep)
-    API.post("api1939e8e6", "/stats", null)
-      .then(result => console.log(result))
-      .catch(err => console.log(err))
+    Auth.currentCredentials().then(res => {
+      console.log(res.data.IdentityId)
+      console.log(global_name)
+      API.post("api1939e8e6", "/feedback", {
+        body: {
+          user: res.data.IdentityId,
+          filename: global_name,
+          feedback: isAccurate
+        }
+      })
+        .then(result => console.log(result))
+        .catch(err => console.log(err.body))
+    })
   }
 
   return (
@@ -129,10 +157,10 @@ const ImagePicker = () => {
           Please leave your feedback for this prediction:
         </h3>
         <div className="upload-row">
-          <button className="upload-col" id="orange-button" onClick={onCorrectClick}>
+          <button disabled={feedbackGiven} className="upload-col" id="orange-button" onClick={onCorrectClick}>
             Accurate
           </button>
-          <button className="upload-col" id="orange-button" onClick={onWrongClick}>
+          <button disabled={feedbackGiven} className="upload-col" id="orange-button" onClick={onWrongClick}>
             Wrong
           </button>
         </div>

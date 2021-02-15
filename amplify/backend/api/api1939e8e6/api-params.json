@@ -1,20 +1,6 @@
 {
     "paths": [
         {
-            "name": "/stats",
-            "lambdaFunction": "writeStatsFunction",
-            "privacy": {
-                "private": true,
-                "auth": [
-                    "/POST",
-                    "/GET",
-                    "/PUT",
-                    "/PATCH"
-                ]
-            },
-            "policyResourceName": "/stats"
-        },
-        {
             "name": "/mjc/{userid}",
             "lambdaFunction": "createreactappauthamplify6d4435aa",
             "privacy": {
@@ -27,25 +13,64 @@
                 ]
             },
             "policyResourceName": "/mjc/*"
+        },
+        {
+            "name": "/archive",
+            "lambdaFunction": "writeStatsFunction",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH"
+                ]
+            },
+            "policyResourceName": "/archive"
+        },
+        {
+            "name": "/feedback",
+            "lambdaFunction": "updateArchiveWithFeedback",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH"
+                ]
+            },
+            "policyResourceName": "/feedback"
         }
     ],
     "resourceName": "api1939e8e6",
     "apiName": "api1939e8e6",
     "functionArns": [
         {
+            "lambdaFunction": "createreactappauthamplify6d4435aa"
+        },
+        {
             "lambdaFunction": "writeStatsFunction"
         },
         {
-            "lambdaFunction": "createreactappauthamplify6d4435aa"
+            "lambdaFunction": "updateArchiveWithFeedback"
         }
     ],
     "privacy": {
-        "auth": 2,
+        "auth": 3,
         "unauth": 0,
         "authRoleName": "amplify-authcra-devt-82135-authRole",
         "unAuthRoleName": "amplify-authcra-devt-82135-unauthRole"
     },
     "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "createreactappauthamplify6d4435aa",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        },
         {
             "category": "function",
             "resourceName": "writeStatsFunction",
@@ -56,12 +81,12 @@
         },
         {
             "category": "function",
-            "resourceName": "createreactappauthamplify6d4435aa",
+            "resourceName": "updateArchiveWithFeedback",
             "attributes": [
                 "Name",
                 "Arn"
             ]
         }
     ],
-    "uuid": "5358f706"
+    "uuid": "3c68a4c3"
 }

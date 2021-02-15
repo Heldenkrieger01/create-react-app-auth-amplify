@@ -7,44 +7,39 @@ table = dynamodb.Table(os.getenv('STORAGE_STATISTICS_NAME'))
 
 def handler(event, context):
     try:
+        print(event)
         body = json.loads(event['body'])
         user = body['user']
         filename = body['filename']
-
-        item = table.get_item(Key={'user': user})
-        if ('Item' in item):
-            print('User exists in table')
+        print(body['filename'])
+        feedback = str(body['feedback'])
+        
+        expression = 'SET uploads.#key.feedback = #fb ADD stats.'
+        adding = "";
+        if feedback == "True":
+            adding = 'correctCount '
         else:
-            table.put_item(
-                Item={
-                    'user': user,
-                    'uploads': {},
-                    'stats':{
-                        'uploadCount': 0,
-                        'correctCount': 0,
-                        'wrongCount': 0               
-                    }
-                }
-            )
-            print('User created in table')
-
+            adding = 'wrongCount '
+        
+        expression += adding
+        expression += ':inc'
+        
+        print(expression)
+        print(filename)
+        
         table.update_item(
             Key={
                 'user': user
             },
-            UpdateExpression='SET uploads.#key = :i ADD stats.uploadCount :inc',
             ExpressionAttributeNames={
-                "#key": filename  
+                "#key": filename,
+                "#fb": feedback
             },
+            UpdateExpression=expression,
             ExpressionAttributeValues={
-                ':i': {
-                    "category": None,
-                    "feedback": None
-                },
                 ":inc": 1
             },
         )
-        
         return {
         'statusCode': 200,
         'headers': {
@@ -52,8 +47,7 @@ def handler(event, context):
             'Access-Control-Allow-Headers': '*',
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
-        },
-        'body': 'success'
+        }
     }
     except Exception as e:
         print(e)
@@ -64,6 +58,5 @@ def handler(event, context):
             'Access-Control-Allow-Headers': '*',
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
-        },
-        'body': 'something happened'
+        }
     }

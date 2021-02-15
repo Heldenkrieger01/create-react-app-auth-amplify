@@ -39,6 +39,10 @@
   outline: none;
 }
 
+#orange-button:disabled {
+  background: gray;
+}
+
 .upload-message {
   margin-top: 8px;
   font-size: calc(0.8px + 1vmin);

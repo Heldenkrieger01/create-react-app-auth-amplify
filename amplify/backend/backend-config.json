@@ -40,6 +40,21 @@
           ]
         }
       ]
+    },
+    "updateArchiveWithFeedback": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "statistics",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
     }
   },
   "api": {
@@ -47,6 +62,14 @@
       "service": "API Gateway",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "createreactappauthamplify6d4435aa",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        },
         {
           "category": "function",
           "resourceName": "writeStatsFunction",
@@ -57,7 +80,7 @@
         },
         {
           "category": "function",
-          "resourceName": "createreactappauthamplify6d4435aa",
+          "resourceName": "updateArchiveWithFeedback",
           "attributes": [
             "Name",
             "Arn"
