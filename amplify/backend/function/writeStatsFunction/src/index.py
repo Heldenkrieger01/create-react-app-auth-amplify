@@ -1,16 +1,22 @@
 import boto3
 import os
+import json
 
 dynamodb = boto3.resource('dynamodb', region_name=os.getenv('REGION'))
 table = dynamodb.Table(os.getenv('STORAGE_STATISTICS_NAME'))
 
 def handler(event, context):
-    user = event[0]
-    filename = event[1]
-    category = event[2]
-    feedback = event[3].lower() in ['true','1']
+    print(event)
+    body = json.loads(event['body'])
+    user = body['user']
+    filename = body['filename']
+    category = body['category']
+    feedback = body['feedback'].lower() in ['true','1']
 
-    if (table.get_item(Key={'user': user} == None)):
+    item = table.get_item(Key={'user': user})
+    if ('Item' in item):
+        print(item['Item'])
+    else:
         table.put_item(
             Item={
                 'user': user,
@@ -28,9 +34,14 @@ def handler(event, context):
         Key={
             'user': user
         },
-        UpdateExpression='SET uploads = list_append(uploads, :i)',
+        UpdateExpression='SET uploads = list_append(if_not_exists(uploads, :empty_list), :i)',
         ExpressionAttributeValues={
-            ':i': [filename, category, feedback],
+            ':i': [{
+                "filename": filename,
+                "category": category,
+                "feedback": feedback
+            }],
+            ":empty_list": {"L":[]}
         },
         ReturnValues='ALL_NEW'
     )
@@ -39,6 +50,7 @@ def handler(event, context):
     return {
         'statusCode': 200,
         'headers': {
+            'Allow-Credentials': 'true',
             'Access-Control-Allow-Headers': '*',
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
