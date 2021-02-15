@@ -26,14 +26,14 @@
         }
       ]
     },
-    "amplifyImageClassification": {
+    "writeStatsFunction": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
       "dependsOn": [
         {
           "category": "storage",
-          "resourceName": "amplifyLabelAllocation",
+          "resourceName": "statistics",
           "attributes": [
             "Name",
             "Arn"
@@ -62,19 +62,13 @@
     "testfilestorage": {
       "service": "S3",
       "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "amplifyImageClassification",
-          "attributes": [
-            "Name",
-            "Arn",
-            "LambdaExecutionRole"
-          ]
-        }
-      ]
+      "dependsOn": []
     },
     "amplifyLabelAllocation": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation"
+    },
+    "statistics": {
       "service": "DynamoDB",
       "providerPlugin": "awscloudformation"
     }

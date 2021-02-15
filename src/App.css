@@ -21,7 +21,7 @@
   color: black;
 }
 
-.upload-button {
+#orange-button {
   background: linear-gradient(to bottom, #ff9900 5%, #ff9900 100%);
   border-radius: 3px;
   display: inline-block;
@@ -30,13 +30,19 @@
   font-size: 20px;
   padding: 10px 16px;
   text-decoration: none;
+  border: none;
+  outline: none;
 }
-.upload-button:hover {
+#orange-button:hover {
   background: linear-gradient(to bottom, #ffad33 5%, #ffad33 100%);
+  border: none;
+  outline: none;
 }
 
 .upload-message {
-  margin-top: 8px
+  margin-top: 8px;
+  font-size: calc(0.8px + 1vmin);
+  font-style: italic;
 }
 
 .upload-image {
@@ -48,7 +54,7 @@
   margin-bottom: 5px;
 }
 
-.title-line {
+#line {
   width: 80%;
 }
 
@@ -69,4 +75,30 @@
 
 .hidden {
   display: none;
+}
+
+.row {
+  display: flex;
+}
+
+.col {
+  flex: 1;
+  padding: 1em;
+}
+
+.upload-row {
+  flex-direction: row;
+  display: inline-block;
+  justify-content: center;
+  width: 80%;
+}
+
+.upload-col {
+  flex: 1;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.upload-prediction-result {
+  text-decoration: underline;
 }

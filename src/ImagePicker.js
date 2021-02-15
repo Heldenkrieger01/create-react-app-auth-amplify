@@ -33,6 +33,7 @@ const ImagePicker = () => {
 
   const fileUpload = file => {
     setUploadResult("")
+    setPredictionResult("")
     const filename = file.name;
     var parts = filename.split(".");
     const fileType = parts[parts.length - 1];
@@ -55,15 +56,16 @@ const ImagePicker = () => {
           type: "ALL"
         }
       })
-      .then(response => handlePredictionResult(response))
-      .catch(error => console.log(error))
+        .then(response => handlePredictionResult(response))
+        .catch(error => console.log(error))
     }
     else
       setUploadResult("Please select an image!")
   }
 
   const handlePredictionResult = result => {
-    setPredictionResult(result?.labels[0].name)
+    if (result?.labels.length > 0)
+      setPredictionResult(result.labels[0].name)
   }
 
   const onButtonClick = () => {
@@ -74,7 +76,7 @@ const ImagePicker = () => {
     <div>
       <div className="dropzone" {...getRootProps({ className: 'dropzone' })}>
         Drag &amp; Drop your file here or click Upload.
-                <p />
+        <p />
         <input {...getInputProps()}
           style={{ display: "none" }}
           accept=".jpg,.png"
@@ -82,7 +84,7 @@ const ImagePicker = () => {
           onChange={handleButtonUpload}
           type="file"
         />
-        <div className="upload-button" onClick={onButtonClick}>
+        <div id="orange-button" onClick={onButtonClick}>
           Upload
         </div>
         <div className={uploadResult === "" ? "hidden" : "upload-message"}>
@@ -93,9 +95,23 @@ const ImagePicker = () => {
         <p className="upload-break" />
         <img className="upload-image" src={imgData} />
       </div>
+      <div className={predictionResult === "" ? "hidden" : "upload-prediction-result"}>
+        {predictionResult}
+      </div>
       <div className={predictionResult === "" ? "hidden" : "upload-predictions"}>
-          {predictionResult}
+        <p />
+        <h3>
+          Please leave your feedback for this prediction:
+        </h3>
+        <div className="upload-row">
+          <button className="upload-col" id="orange-button">
+            Accurate
+          </button>
+          <button className="upload-col" id="orange-button">
+            Wrong
+          </button>
         </div>
+      </div>
     </div>
   );
 };

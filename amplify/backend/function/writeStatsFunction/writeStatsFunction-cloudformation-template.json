@@ -16,13 +16,13 @@
     "s3Key": {
       "Type": "String"
     },
-    "storageamplifyLabelAllocationName": {
+    "storagestatisticsName": {
       "Type": "String",
-      "Default": "storageamplifyLabelAllocationName"
+      "Default": "storagestatisticsName"
     },
-    "storageamplifyLabelAllocationArn": {
+    "storagestatisticsArn": {
       "Type": "String",
-      "Default": "storageamplifyLabelAllocationArn"
+      "Default": "storagestatisticsArn"
     }
   },
   "Conditions": {
@@ -55,12 +55,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "amplifyImageClassification",
+            "writeStatsFunction",
             {
               "Fn::Join": [
                 "",
                 [
-                  "amplifyImageClassification",
+                  "writeStatsFunction",
                   "-",
                   {
                     "Ref": "env"
@@ -78,11 +78,11 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "STORAGE_AMPLIFYLABELALLOCATION_NAME": {
-              "Ref": "storageamplifyLabelAllocationName"
+            "STORAGE_STATISTICS_NAME": {
+              "Ref": "storagestatisticsName"
             },
-            "STORAGE_AMPLIFYLABELALLOCATION_ARN": {
-              "Ref": "storageamplifyLabelAllocationArn"
+            "STORAGE_STATISTICS_ARN": {
+              "Ref": "storagestatisticsArn"
             }
           }
         },
@@ -103,12 +103,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "createreactappauthamplifyLambdaRole515e6675",
+            "testamplifyLambdaRole164f0f23",
             {
               "Fn::Join": [
                 "",
                 [
-                  "createreactappauthamplifyLambdaRole515e6675",
+                  "testamplifyLambdaRole164f0f23",
                   "-",
                   {
                     "Ref": "env"
@@ -197,23 +197,29 @@
             {
               "Effect": "Allow",
               "Action": [
+                "dynamodb:Put*",
+                "dynamodb:Create*",
+                "dynamodb:BatchWriteItem",
                 "dynamodb:Get*",
                 "dynamodb:BatchGetItem",
                 "dynamodb:List*",
                 "dynamodb:Describe*",
                 "dynamodb:Scan",
-                "dynamodb:Query"
+                "dynamodb:Query",
+                "dynamodb:Update*",
+                "dynamodb:RestoreTable*",
+                "dynamodb:Delete*"
               ],
               "Resource": [
                 {
-                  "Ref": "storageamplifyLabelAllocationArn"
+                  "Ref": "storagestatisticsArn"
                 },
                 {
                   "Fn::Join": [
                     "/",
                     [
                       {
-                        "Ref": "storageamplifyLabelAllocationArn"
+                        "Ref": "storagestatisticsArn"
                       },
                       "index/*"
                     ]
