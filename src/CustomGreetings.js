@@ -1,6 +1,7 @@
 import Amplify, { Auth } from "aws-amplify";
 import React, { useState, useRef, useCallback } from "react";
-import { Greetings, SignOut, NavBar, NavRight, Nav, AmplifyTheme, NavItem, UsernameAttributes } from 'aws-amplify-react'
+import { Greetings, SignOut, NavBar, NavRight, Nav, AmplifyTheme, NavItem } from 'aws-amplify-react'
+import UsernameAttributes from 'aws-amplify'
 import aws_exports from './aws-exports';
 Amplify.configure(aws_exports);
 
