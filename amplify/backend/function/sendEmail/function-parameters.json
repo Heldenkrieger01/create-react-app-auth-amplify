@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "auth": {
+      "cognitocf0c6096": [
+        "read"
+      ]
+    },
+    "storage": {
+      "statistics": [
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

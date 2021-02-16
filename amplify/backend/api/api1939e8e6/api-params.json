@@ -69,6 +69,34 @@
                 ]
             },
             "policyResourceName": "/statistics"
+        },
+        {
+            "name": "/newFeedback",
+            "lambdaFunction": "newUpdateArchiveWithFeedback",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH"
+                ]
+            },
+            "policyResourceName": "/newFeedback"
+        },
+        {
+            "name": "/newStatistics",
+            "lambdaFunction": "newGetStatistics",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH"
+                ]
+            },
+            "policyResourceName": "/newStatistics"
         }
     ],
     "resourceName": "api1939e8e6",
@@ -88,10 +116,16 @@
         },
         {
             "lambdaFunction": "getStatistics"
+        },
+        {
+            "lambdaFunction": "newUpdateArchiveWithFeedback"
+        },
+        {
+            "lambdaFunction": "newGetStatistics"
         }
     ],
     "privacy": {
-        "auth": 5,
+        "auth": 7,
         "unauth": 0,
         "authRoleName": "amplify-authcra-devt-82135-authRole",
         "unAuthRoleName": "amplify-authcra-devt-82135-unauthRole"
@@ -136,7 +170,23 @@
                 "Name",
                 "Arn"
             ]
+        },
+        {
+            "category": "function",
+            "resourceName": "newUpdateArchiveWithFeedback",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        },
+        {
+            "category": "function",
+            "resourceName": "newGetStatistics",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
         }
     ],
-    "uuid": "8e9b8412"
+    "uuid": "ee09fa90"
 }

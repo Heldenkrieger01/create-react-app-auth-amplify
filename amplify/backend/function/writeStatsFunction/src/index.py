@@ -23,7 +23,27 @@ def handler(event, context):
                     'stats':{
                         'uploadCount': 0,
                         'correctCount': 0,
-                        'wrongCount': 0               
+                        'wrongCount': 0,
+                        'Animal':{
+                            'correctCount': 0,
+                            'wrongCount': 0
+                        },
+                        'Human':{
+                            'correctCount': 0,
+                            'wrongCount': 0
+                        },
+                        'Car':{
+                            'correctCount': 0,
+                            'wrongCount': 0
+                        },
+                        'Landscape':{
+                            'correctCount': 0,
+                            'wrongCount': 0
+                        },
+                        'NOT_DEFINED':{
+                            'correctCount': 0,
+                            'wrongCount': 0
+                        }
                     }
                 }
             )
@@ -39,7 +59,27 @@ def handler(event, context):
                     'stats':{
                         'uploadCount': 0,
                         'correctCount': 0,
-                        'wrongCount': 0               
+                        'wrongCount': 0,
+                        'Animal':{
+                            'correctCount': 0,
+                            'wrongCount': 0
+                        },
+                        'Human':{
+                            'correctCount': 0,
+                            'wrongCount': 0
+                        },
+                        'Car':{
+                            'correctCount': 0,
+                            'wrongCount': 0
+                        },
+                        'Landscape':{
+                            'correctCount': 0,
+                            'wrongCount': 0
+                        },
+                        'NOT_DEFINED':{
+                            'correctCount': 0,
+                            'wrongCount': 0
+                        }            
                     }             
                 }
             )

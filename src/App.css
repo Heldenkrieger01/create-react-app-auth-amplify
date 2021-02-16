@@ -106,3 +106,18 @@
 .upload-prediction-result {
   text-decoration: underline;
 }
+
+.stats-chart {
+  align-content: center;
+  display: inline-block;
+  width: 60%;
+  height: fit-content;
+}
+
+.stats-tooltip {
+  background-color: white;
+  padding: 3px;
+  border-color: #ff9900;
+  border-style: solid;
+  border-width: 2px;
+}

@@ -76,12 +76,13 @@ const ImagePicker = () => {
   }
 
   const handleUploadSuccess = () => {
+    console.log("upload success")
     setUploadResult("Upload successfull!")
-    Auth.currentCredentials().then(res => {
-      console.log(res.data.IdentityId)
+    Auth.currentUserPoolUser().then(user => {
+      console.log(user.attributes.sub)
       API.post("api1939e8e6", "/archive", {
         body: {
-          user: res.data.IdentityId,
+          user: user.attributes.sub,
           filename: global_name,
         }
       })
@@ -93,10 +94,10 @@ const ImagePicker = () => {
   const handlePredictionResult = result => {
     console.log(result)
     if (result?.labels.length > 0)
-      Auth.currentCredentials().then(res => {
+      Auth.currentUserPoolUser().then(user => {
         API.post("api1939e8e6", "/category", {
           body: {
-            user: res.data.IdentityId,
+            user: user.attributes.sub,
             filename: global_name,
             predictionList: result
           }
@@ -126,12 +127,12 @@ const ImagePicker = () => {
   }
 
   const connectToApi = isAccurate => {
-    Auth.currentCredentials().then(res => {
-      console.log(res.data.IdentityId)
+    Auth.currentUserPoolUser().then(user => {
+      console.log(user.attributes.sub)
       console.log(global_name)
       API.post("api1939e8e6", "/feedback", {
         body: {
-          user: res.data.IdentityId,
+          user: user.attributes.sub,
           filename: global_name,
           feedback: isAccurate
         }

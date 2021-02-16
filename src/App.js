@@ -16,7 +16,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1>
-            Image Categorizer Web App
+            Image Categorizer 6000
           </h1>
           <hr id="line" />
         </header>
@@ -27,7 +27,7 @@ class App extends Component {
           <ImagePicker />
           <hr id="line" />
           <h2>
-            Stats for the Image Classifier 6000
+            Statistics
           </h2>
           <Stats />
         </body>
