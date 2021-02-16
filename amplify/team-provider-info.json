@@ -30,15 +30,23 @@
         },
         "amplifyCreateLabelAllocationItems": {
           "deploymentBucketName": "amplify-authcra-devt-82135-deployment",
-          "s3Key": "amplify-builds/amplifyCreateLabelAllocationItems-355375592b5343315579-build.zip"
+          "s3Key": "amplify-builds/amplifyCreateLabelAllocationItems-7a644c674837576b2b76-build.zip"
         },
         "writeStatsFunction": {
           "deploymentBucketName": "amplify-authcra-devt-82135-deployment",
-          "s3Key": "amplify-builds/writeStatsFunction-3672464a4b556a324a49-build.zip"
+          "s3Key": "amplify-builds/writeStatsFunction-4a6a724a6666546f4154-build.zip"
         },
         "updateArchiveWithFeedback": {
           "deploymentBucketName": "amplify-authcra-devt-82135-deployment",
-          "s3Key": "amplify-builds/updateArchiveWithFeedback-4a5175364f35616d4e4f-build.zip"
+          "s3Key": "amplify-builds/updateArchiveWithFeedback-745161517777474b6c63-build.zip"
+        },
+        "updateArchiveWithCategory": {
+          "deploymentBucketName": "amplify-authcra-devt-82135-deployment",
+          "s3Key": "amplify-builds/updateArchiveWithCategory-44496261695a3346485a-build.zip"
+        },
+        "getStatistics": {
+          "deploymentBucketName": "amplify-authcra-devt-82135-deployment",
+          "s3Key": "amplify-builds/getStatistics-48346744704679553055-build.zip"
         }
       }
     }

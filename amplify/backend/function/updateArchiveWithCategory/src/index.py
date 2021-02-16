@@ -6,25 +6,26 @@ dynamodb = boto3.resource('dynamodb', region_name=os.getenv('REGION'))
 table = dynamodb.Table(os.getenv('STORAGE_STATISTICS_NAME'))
 
 def handler(event, context):
+    print(event)
     try:
         body = json.loads(event['body'])
         user = body['user']
         filename = body['filename']
-        feedback = str(body['feedback'])
-        globalStats = 'globalStats'
+        predictionResult = body['predictionList']
         
-        expression_globalStats = 'ADD stats.'
-        expression = 'SET uploads.#key.feedback = :fb ADD stats.'
-        adding = "";
-        if feedback == "True":
-            adding = 'correctCount '
-        else:
-            adding = 'wrongCount '
+        detected_category = 'NOT_DEFINED'
         
-        expression += adding
-        expression += ':inc'
-        expression_globalStats += adding
-        expression_globalStats += ':inc'
+        categories = ['Human', 'Landscape', 'Car', 'Animal']
+    
+        for label in predictionResult['labels']:
+            name = label['name']
+            if name in categories:
+                detected_category = name
+                break
+
+        print(detected_category)
+        
+        expression = 'SET uploads.#key.category = :c'
         
         table.update_item(
             Key={
@@ -35,18 +36,7 @@ def handler(event, context):
                 "#key": filename
             },
             ExpressionAttributeValues={
-                ":inc": 1,
-                ":fb": feedback
-            },
-        )
-        
-        table.update_item(
-            Key={
-                'user': globalStats
-            },
-            UpdateExpression=expression_globalStats,
-            ExpressionAttributeValues={
-                ":inc": 1
+                ":c": detected_category
             },
         )
         
@@ -57,7 +47,10 @@ def handler(event, context):
             'Access-Control-Allow-Headers': '*',
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
-        }
+        },
+        'body': json.dumps({
+            'category': detected_category
+            })
     }
     except Exception as e:
         print(e)

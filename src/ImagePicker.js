@@ -85,14 +85,30 @@ const ImagePicker = () => {
           filename: global_name,
         }
       })
-        .then(result => console.log(result.body))
+        .then(result => console.log(result))
         .catch(err => console.log(err.body))
     })
   }
 
   const handlePredictionResult = result => {
+    console.log(result)
     if (result?.labels.length > 0)
-      setPredictionResult(result.labels[0].name)
+      Auth.currentCredentials().then(res => {
+        API.post("api1939e8e6", "/category", {
+          body: {
+            user: res.data.IdentityId,
+            filename: global_name,
+            predictionList: result
+          }
+        })
+          .then(responseBody => { 
+            if(responseBody.category == "NOT_DEFINED")
+              setPredictionResult("Undefined")
+            else 
+              setPredictionResult(responseBody.category)
+          })
+          .catch(err => console.log(err.body))
+      })
   }
 
   const onUploadClick = () => {

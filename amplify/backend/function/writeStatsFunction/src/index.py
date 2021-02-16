@@ -10,6 +10,7 @@ def handler(event, context):
         body = json.loads(event['body'])
         user = body['user']
         filename = body['filename']
+        globalStats = 'globalStats'
 
         item = table.get_item(Key={'user': user})
         if ('Item' in item):
@@ -27,6 +28,22 @@ def handler(event, context):
                 }
             )
             print('User created in table')
+        
+        item = table.get_item(Key={'user': globalStats})
+        if ('Item' in item):
+            print('globalStats exist in table')
+        else:
+            table.put_item(
+                Item={
+                    'user': globalStats,
+                    'stats':{
+                        'uploadCount': 0,
+                        'correctCount': 0,
+                        'wrongCount': 0               
+                    }             
+                }
+            )
+            print('globalStats created in table')
 
         table.update_item(
             Key={
@@ -38,9 +55,19 @@ def handler(event, context):
             },
             ExpressionAttributeValues={
                 ':i': {
-                    "category": None,
-                    "feedback": None
+                    "category": "",
+                    "feedback": ""
                 },
+                ":inc": 1
+            },
+        )
+        
+        table.update_item(
+            Key={
+                'user': globalStats
+            },
+            UpdateExpression='ADD stats.uploadCount :inc',
+            ExpressionAttributeValues={
                 ":inc": 1
             },
         )

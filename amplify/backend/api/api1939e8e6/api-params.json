@@ -41,6 +41,34 @@
                 ]
             },
             "policyResourceName": "/feedback"
+        },
+        {
+            "name": "/category",
+            "lambdaFunction": "updateArchiveWithCategory",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH"
+                ]
+            },
+            "policyResourceName": "/category"
+        },
+        {
+            "name": "/statistics",
+            "lambdaFunction": "getStatistics",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH"
+                ]
+            },
+            "policyResourceName": "/statistics"
         }
     ],
     "resourceName": "api1939e8e6",
@@ -54,10 +82,16 @@
         },
         {
             "lambdaFunction": "updateArchiveWithFeedback"
+        },
+        {
+            "lambdaFunction": "updateArchiveWithCategory"
+        },
+        {
+            "lambdaFunction": "getStatistics"
         }
     ],
     "privacy": {
-        "auth": 3,
+        "auth": 5,
         "unauth": 0,
         "authRoleName": "amplify-authcra-devt-82135-authRole",
         "unAuthRoleName": "amplify-authcra-devt-82135-unauthRole"
@@ -86,7 +120,23 @@
                 "Name",
                 "Arn"
             ]
+        },
+        {
+            "category": "function",
+            "resourceName": "updateArchiveWithCategory",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        },
+        {
+            "category": "function",
+            "resourceName": "getStatistics",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
         }
     ],
-    "uuid": "3c68a4c3"
+    "uuid": "8e9b8412"
 }
