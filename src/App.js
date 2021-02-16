@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {  ConfirmSignIn, SignIn, SignUp, VerifyContact, ConfirmSignUp, ForgotPassword, RequireNewPassword, withAuthenticator } from 'aws-amplify-react'
 import Amplify from 'aws-amplify';
 import aws_exports from './aws-exports';
-import { render } from 'react-dom';
 import ImagePicker from "./ImagePicker"
 import Stats from "./Stats"
 import CustomGreetings from './CustomGreetings';

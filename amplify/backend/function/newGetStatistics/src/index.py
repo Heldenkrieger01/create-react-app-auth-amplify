@@ -26,6 +26,7 @@ def handler(event, context):
             responseBody[user]['wrongCount'] = userItem['Item']['stats']['wrongCount']
             for category in categories:
                 responseBody[user][category] = dict()
+                responseBody[user][category]['uploadCount'] = userItem['Item']['stats'][category]['uploadCount']
                 responseBody[user][category]['correctCount'] = userItem['Item']['stats'][category]['correctCount']
                 responseBody[user][category]['wrongCount'] = userItem['Item']['stats'][category]['wrongCount']
             

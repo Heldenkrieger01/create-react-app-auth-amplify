@@ -14,7 +14,7 @@ def handler(event, context):
         predictionResult = body['predictionList']
         
         detected_category = 'NOT_DEFINED'
-        
+        globalStats = 'globalStats'
         categories = ['Human', 'Landscape', 'Car', 'Animal']
     
         for label in predictionResult['labels']:
@@ -25,18 +25,35 @@ def handler(event, context):
 
         print(detected_category)
         
-        expression = 'SET uploads.#key.category = :c'
-        
+        #user
+        expression = 'SET uploads.#key.category = :c ADD stats.#category.uploadCount :inc'
         table.update_item(
             Key={
                 'user': user
             },
             UpdateExpression=expression,
             ExpressionAttributeNames={
-                "#key": filename
+                "#key": filename,
+                "#category": detected_category
             },
             ExpressionAttributeValues={
-                ":c": detected_category
+                ":c": detected_category,
+                ':inc': 1
+            },
+        )
+        
+        #global
+        expression_global = 'ADD stats.#category.uploadCount :inc'
+        table.update_item(
+            Key={
+                'user': globalStats
+            },
+            UpdateExpression=expression_global,
+            ExpressionAttributeNames={
+                "#category": detected_category
+            },
+            ExpressionAttributeValues={
+                ':inc': 1
             },
         )
         

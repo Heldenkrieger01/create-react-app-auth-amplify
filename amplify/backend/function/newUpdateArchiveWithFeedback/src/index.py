@@ -16,27 +16,28 @@ def handler(event, context):
             category = 'NOT_DEFINED'
         globalStats = 'globalStats'
         
-        expression = 'SET uploads.#key.feedback = :fb ADD stats.'
+        expression_user = 'SET uploads.#key.feedback = :fb ADD stats.'
         expression_globalStats = 'ADD stats.'
-        expression_category = ' ADD stats.#c.'
-        adding = ''
-        if feedback == 'True':
-            adding = 'correctCount :inc'
-        else:
-            adding = 'wrongCount :inc'
         
-        expression += adding
-        expression_globalStats += adding
-        expression_category += adding
-
-        expression += expression_category
-        expression_globalStats += expression_category
+        expression_count_to_add = ''
+        if feedback == 'True':
+            expression_count_to_add = 'correctCount :inc'
+        else:
+            expression_count_to_add = 'wrongCount :inc'
+        
+        expression_user += expression_count_to_add
+        expression_globalStats += expression_count_to_add
+        
+        expression_part_category = ', stats.#c.'
+        expression_part_category += expression_count_to_add
+        expression_user += expression_part_category
+        expression_globalStats += expression_part_category
         
         table.update_item(
             Key={
                 'user': user
             },
-            UpdateExpression=expression,
+            UpdateExpression=expression_user,
             ExpressionAttributeNames={
                 '#key': filename,
                 '#c': category

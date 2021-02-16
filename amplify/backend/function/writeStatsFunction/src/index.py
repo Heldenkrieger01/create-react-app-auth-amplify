@@ -11,79 +11,51 @@ def handler(event, context):
         user = body['user']
         filename = body['filename']
         globalStats = 'globalStats'
-
-        item = table.get_item(Key={'user': user})
-        if ('Item' in item):
-            print('User exists in table')
-        else:
-            table.put_item(
-                Item={
-                    'user': user,
-                    'uploads': {},
-                    'stats':{
-                        'uploadCount': 0,
-                        'correctCount': 0,
-                        'wrongCount': 0,
-                        'Animal':{
+        
+        keys = [user, globalStats]
+        
+        for key in keys:
+            item = table.get_item(Key={'user': key})
+            if ('Item' in item):
+                print(str(key) + 'exists in table')
+            else:
+                table.put_item(
+                    Item={
+                        'user': key,
+                        'uploads': {},
+                        'stats':{
+                            'uploadCount': 0,
                             'correctCount': 0,
-                            'wrongCount': 0
-                        },
-                        'Human':{
-                            'correctCount': 0,
-                            'wrongCount': 0
-                        },
-                        'Car':{
-                            'correctCount': 0,
-                            'wrongCount': 0
-                        },
-                        'Landscape':{
-                            'correctCount': 0,
-                            'wrongCount': 0
-                        },
-                        'NOT_DEFINED':{
-                            'correctCount': 0,
-                            'wrongCount': 0
+                            'wrongCount': 0,
+                            'Animal':{
+                                'uploadCount': 0,
+                                'correctCount': 0,
+                                'wrongCount': 0
+                            },
+                            'Human':{
+                                'uploadCount': 0,
+                                'correctCount': 0,
+                                'wrongCount': 0
+                            },
+                            'Car':{
+                                'uploadCount': 0,
+                                'correctCount': 0,
+                                'wrongCount': 0
+                            },
+                            'Landscape':{
+                                'uploadCount': 0,
+                                'correctCount': 0,
+                                'wrongCount': 0
+                            },
+                            'NOT_DEFINED':{
+                                'uploadCount': 0,
+                                'correctCount': 0,
+                                'wrongCount': 0
+                            }
                         }
                     }
-                }
-            )
-            print('User created in table')
-        
-        item = table.get_item(Key={'user': globalStats})
-        if ('Item' in item):
-            print('globalStats exist in table')
-        else:
-            table.put_item(
-                Item={
-                    'user': globalStats,
-                    'stats':{
-                        'uploadCount': 0,
-                        'correctCount': 0,
-                        'wrongCount': 0,
-                        'Animal':{
-                            'correctCount': 0,
-                            'wrongCount': 0
-                        },
-                        'Human':{
-                            'correctCount': 0,
-                            'wrongCount': 0
-                        },
-                        'Car':{
-                            'correctCount': 0,
-                            'wrongCount': 0
-                        },
-                        'Landscape':{
-                            'correctCount': 0,
-                            'wrongCount': 0
-                        },
-                        'NOT_DEFINED':{
-                            'correctCount': 0,
-                            'wrongCount': 0
-                        }            
-                    }             
-                }
-            )
-            print('globalStats created in table')
+                )
+                print(str(key) + ' created in table')
 
         table.update_item(
             Key={

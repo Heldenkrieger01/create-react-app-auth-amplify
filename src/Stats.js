@@ -12,7 +12,7 @@ const Stats = () => {
 
   const getStatistics = () => {
     Auth.currentUserPoolUser().then(user => {
-      API.post("api1939e8e6", "/statistics", {
+      API.post("api1939e8e6", "/newStatistics", {
         body: {
           users: [user.attributes.sub, 'globalStats']
         }

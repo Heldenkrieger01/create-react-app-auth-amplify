@@ -118,23 +118,24 @@ const ImagePicker = () => {
 
   const onCorrectClick = () => {
     setFeedbackGiven(true)
-    connectToApi(true)
+    uploadFeedback(true)
   }
 
   const onWrongClick = () => {
     setFeedbackGiven(true)
-    connectToApi(false)
+    uploadFeedback(false)
   }
 
-  const connectToApi = isAccurate => {
+  const uploadFeedback = isAccurate => {
     Auth.currentUserPoolUser().then(user => {
       console.log(user.attributes.sub)
       console.log(global_name)
-      API.post("api1939e8e6", "/feedback", {
+      API.post("api1939e8e6", "/newFeedback", {
         body: {
           user: user.attributes.sub,
           filename: global_name,
-          feedback: isAccurate
+          feedback: isAccurate,
+          category: predictionResult
         }
       })
         .then(result => console.log(result))
