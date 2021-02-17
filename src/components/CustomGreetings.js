@@ -4,10 +4,6 @@ import UsernameAttributes from 'aws-amplify'
 import '../styles/CustomGreetings.css'
 
 class CustomGreetings extends Greetings {
-  constructor(props) {
-    super(props);
-  }
-
   userGreetingsNoButton(theme) {
     const user = this.props.authData || this.state.authData;
     const greeting = this.props.inGreeting || this.inGreeting;

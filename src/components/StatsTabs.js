@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { TabList, Tabs, Tab, TabPanel } from "react-tabs";
 import '../styles/StatsTabs.css'
 import StatsTabPanel from "./StatsTabPanel";

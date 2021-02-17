@@ -161,7 +161,7 @@ const ImageUploader = () => {
       </div>
       <div>
         <p className="upload-break" />
-        <img className="upload-image" src={imgData} />
+        <img className="upload-image" src={imgData} alt=""/>
       </div>
       <div className={predictionResult === "" ? "hidden" : "upload-prediction-result"}>
         {predictionResult}

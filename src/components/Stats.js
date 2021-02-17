@@ -21,10 +21,10 @@ const Stats = () => {
             for (var k in responseBody[i]) {
               res[k] = handleCategory(responseBody, i, k, user)
             }
-            if (i == user.attributes.sub) {
+            if (i === user.attributes.sub) {
               setUserStats(res)
             }
-            else if (i == "globalStats") {
+            else if (i === "globalStats") {
               setGlobalStats(res)
             }
           }
@@ -37,10 +37,10 @@ const Stats = () => {
   const handleCategory = (body, i, k, user) => {
     var result = []
     body[i][k]['noFeedbackCount'] = body[i][k].uploadCount - body[i][k].correctCount - body[i][k].wrongCount
-    if (i == user.attributes.sub) {
+    if (i === user.attributes.sub) {
       body[i][k].name = user.username
     }
-    else if (i == "globalStats") {
+    else if (i === "globalStats") {
       body[i][k].name = "Global"
     }
     result.push(body[i][k])
