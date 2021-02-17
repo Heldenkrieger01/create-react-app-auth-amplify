@@ -24,9 +24,11 @@ def handler(event, context):
                         'user': key,
                         'uploads': {},
                         'stats':{
-                            'uploadCount': 0,
-                            'correctCount': 0,
-                            'wrongCount': 0,
+                            'Overview':{
+                                'uploadCount': 0,
+                                'correctCount': 0,
+                                'wrongCount': 0,
+                            },
                             'Animal':{
                                 'uploadCount': 0,
                                 'correctCount': 0,
@@ -61,7 +63,7 @@ def handler(event, context):
             Key={
                 'user': user
             },
-            UpdateExpression='SET uploads.#key = :i ADD stats.uploadCount :inc',
+            UpdateExpression='SET uploads.#key = :i ADD stats.Overview.uploadCount :inc',
             ExpressionAttributeNames={
                 "#key": filename  
             },
@@ -78,7 +80,7 @@ def handler(event, context):
             Key={
                 'user': globalStats
             },
-            UpdateExpression='ADD stats.uploadCount :inc',
+            UpdateExpression='ADD stats.Overview.uploadCount :inc',
             ExpressionAttributeValues={
                 ":inc": 1
             },

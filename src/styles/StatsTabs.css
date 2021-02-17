@@ -1,0 +1,68 @@
+.tabs {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tablist {
+  border-bottom: 1px solid #aaa;
+  margin: 0 0 10px;
+  padding: 0;
+}
+
+.inner-tab {
+  display: inline-block;
+  border: 1px solid transparent;
+  border-bottom: none;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 5px 5px 0 0;
+}
+
+.inner-tab--selected {
+  background: #ff9900;
+  border-color: #aaa;
+  color: white;
+}
+
+.inner-tab:focus {
+  outline: none;
+}
+
+.outer-tab {
+  display: inline-block;
+  border: 1px solid transparent;
+  border-bottom: none;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 5px 5px 0 0;
+  background-color: transparent;
+  color: black;
+}
+
+.outer-tab--selected {
+  background-color: #0066ff;
+  border-color: #aaa;
+  color: white;
+}
+
+.outer-tab:focus {
+  outline: none;
+}
+
+.react-tabs__tab-panel {
+  display: none;
+}
+
+.react-tabs__tab-panel--selected {
+  display: block;
+}
+
+.innerStatsTabContainer {
+  width: 95%;
+  display: inline-block;
+}

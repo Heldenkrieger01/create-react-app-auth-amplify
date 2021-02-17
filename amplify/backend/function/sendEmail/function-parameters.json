@@ -5,6 +5,13 @@
         "read"
       ]
     },
+    "function": {
+      "newGetStatistics": [
+        "create",
+        "read",
+        "update"
+      ]
+    },
     "storage": {
       "statistics": [
         "read"

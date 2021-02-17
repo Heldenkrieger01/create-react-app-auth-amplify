@@ -1,0 +1,41 @@
+.upload-message {
+  margin-top: 8px;
+  font-size: calc(0.8px + 1vmin);
+  font-style: italic;
+}
+
+.upload-image {
+  width: 25%;
+  height: auto;
+}
+
+.upload-break {
+  margin-bottom: 5px;
+}
+
+.upload-row {
+  flex-direction: row;
+  display: inline-block;
+  justify-content: center;
+  width: 80%;
+}
+
+.upload-col {
+  flex: 1;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.upload-dropzone {
+  border-width: 2px;
+  border-color: #eeeeee;
+  border-style: dashed;
+  background-color: #fafafa;
+  width: 75%;
+  padding: 20px;
+  display: inline-block;
+}
+
+.upload-prediction-result {
+  text-decoration: underline;
+}

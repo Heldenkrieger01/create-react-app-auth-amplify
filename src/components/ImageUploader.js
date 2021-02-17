@@ -1,17 +1,15 @@
 import Amplify, { API, Storage, Auth } from "aws-amplify";
 import Predictions, { AmazonAIPredictionsProvider } from '@aws-amplify/predictions'
-import React, { useState, useRef, useCallback, useImperativeHandle } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import { useDropzone } from 'react-dropzone'
-import aws_exports from './aws-exports';
 import { v4 as uuidv4} from 'uuid';
-Amplify.configure(aws_exports);
+import "../styles/ImageUploader.css"
 Amplify.addPluggable(new AmazonAIPredictionsProvider())
 
 //hook is async and does not work... sadly
 var global_name = "";
 
-const ImagePicker = () => {
-  const [image, setImage] = useState("");
+const ImageUploader = () => {
   const [imgData, setImgData] = useState(null);
   const inputFile = useRef(null);
   const [uploadResult, setUploadResult] = useState("")
@@ -50,7 +48,6 @@ const ImagePicker = () => {
       parts[0] = parts[0].concat(uniqueid)
       var unique_filename = parts.join('.')
       global_name = unique_filename
-      setImage(file);
       const reader = new FileReader();
       reader.addEventListener("load", () => {
         setImgData(reader.result);
@@ -103,7 +100,7 @@ const ImagePicker = () => {
           }
         })
           .then(responseBody => { 
-            if(responseBody.category == "NOT_DEFINED")
+            if(responseBody.category === "NOT_DEFINED")
               setPredictionResult("Undefined")
             else 
               setPredictionResult(responseBody.category)
@@ -145,7 +142,7 @@ const ImagePicker = () => {
 
   return (
     <div>
-      <div className="dropzone" {...getRootProps({ className: 'dropzone' })}>
+      <div className="upload-dropzone" {...getRootProps({ className: 'upload-dropzone' })}>
         Drag &amp; Drop your file here or click Upload.
         <p />
         <input {...getInputProps()}
@@ -187,4 +184,4 @@ const ImagePicker = () => {
   );
 };
 
-export default ImagePicker;
+export default ImageUploader;

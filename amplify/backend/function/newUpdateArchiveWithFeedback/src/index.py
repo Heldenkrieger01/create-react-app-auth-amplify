@@ -16,8 +16,8 @@ def handler(event, context):
             category = 'NOT_DEFINED'
         globalStats = 'globalStats'
         
-        expression_user = 'SET uploads.#key.feedback = :fb ADD stats.'
-        expression_globalStats = 'ADD stats.'
+        expression_user = 'SET uploads.#key.feedback = :fb ADD stats.Overview.'
+        expression_globalStats = 'ADD stats.Overview.'
         
         expression_count_to_add = ''
         if feedback == 'True':

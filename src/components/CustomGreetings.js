@@ -1,9 +1,7 @@
-import Amplify, { Auth } from "aws-amplify";
-import React, { useState, useRef, useCallback } from "react";
-import { Greetings, SignOut, NavBar, NavRight, Nav, AmplifyTheme, NavItem } from 'aws-amplify-react'
+import React from "react";
+import { Greetings, NavBar, NavRight, Nav, AmplifyTheme, NavItem } from 'aws-amplify-react'
 import UsernameAttributes from 'aws-amplify'
-import aws_exports from './aws-exports';
-Amplify.configure(aws_exports);
+import '../styles/CustomGreetings.css'
 
 class CustomGreetings extends Greetings {
   constructor(props) {
@@ -59,16 +57,16 @@ class CustomGreetings extends Greetings {
     }
 
     return (
-      <NavBar>
-        <Nav>
-          <span className="row">
-            {greeting}
-            <NavRight className="col">
-              {this.renderSignOutButton()}
-            </NavRight>
-          </span>
-        </Nav>
-      </NavBar>
+        <NavBar>
+          <Nav>
+            <span className="row">
+              {greeting}
+              <NavRight className="col">
+                {this.renderSignOutButton()}
+              </NavRight>
+            </span>
+          </Nav>
+        </NavBar>
     );
   }
 }

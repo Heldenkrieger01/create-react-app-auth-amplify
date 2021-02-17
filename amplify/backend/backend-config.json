@@ -99,6 +99,13 @@
           ]
         },
         {
+          "category": "function",
+          "resourceName": "newGetStatistics",
+          "attributes": [
+            "Name"
+          ]
+        },
+        {
           "category": "storage",
           "resourceName": "statistics",
           "attributes": [

@@ -27,6 +27,10 @@
     "storagestatisticsArn": {
       "Type": "String",
       "Default": "storagestatisticsArn"
+    },
+    "functionnewGetStatisticsName": {
+      "Type": "String",
+      "Default": "functionnewGetStatisticsName"
     }
   },
   "Conditions": {
@@ -90,6 +94,9 @@
             },
             "STORAGE_STATISTICS_ARN": {
               "Ref": "storagestatisticsArn"
+            },
+            "FUNCTION_NEWGETSTATISTICS_NAME": {
+              "Ref": "functionnewGetStatisticsName"
             }
           }
         },
@@ -235,6 +242,39 @@
                       ":userpool/",
                       {
                         "Ref": "authcognitocf0c6096UserPoolId"
+                      }
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "lambda:Create*",
+                "lambda:Put*",
+                "lambda:Add*",
+                "lambda:Get*",
+                "lambda:List*",
+                "lambda:Invoke*",
+                "lambda:Update*"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:lambda:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":function:",
+                      {
+                        "Ref": "functionnewGetStatisticsName"
                       }
                     ]
                   ]

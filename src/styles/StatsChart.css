@@ -1,0 +1,14 @@
+.stats-chart {
+    align-content: center;
+    display: inline-block;
+    width: 90%;
+    height: fit-content;
+}
+
+.stats-tooltip {
+  background-color: white;
+  padding: 3px;
+  border-color: #ff9900;
+  border-style: solid;
+  border-width: 2px;
+}

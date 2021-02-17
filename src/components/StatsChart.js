@@ -1,9 +1,6 @@
-import Amplify from "aws-amplify";
-import React, { useState, useRef, useCallback } from "react";
-import aws_exports from './aws-exports';
-import 'react-tabs/style/react-tabs.css'
-import { BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis, Bar, Label, ResponsiveContainer } from "recharts";
-Amplify.configure(aws_exports);
+import React, { useState } from "react";
+import { BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis, Bar, ResponsiveContainer } from "recharts";
+import "../styles/StatsChart.css"
 
 const StatsChart = (props) => {
   const [correctFill, seCorrectFill] = useState("#5A9120ff")
@@ -69,15 +66,15 @@ const StatsChart = (props) => {
 
   return (
     <div className="stats-chart">
-      <ResponsiveContainer width="100%" minHeight="300px">
+      <ResponsiveContainer width="100%" minHeight="400px">
         <BarChart width={730} height={250} data={props.stats}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" tick={false} />
-          <YAxis />
+          <YAxis tickCount={10} allowDecimals={false}/>
           <Legend verticalAlign="bottom" />
           <Tooltip cursor={{fill: "transparent"}} animationDuration={500} offset={0} content={<BarTooltip />} />
-          <Bar onMouseOver={() => setCurrentTooltip("correctCount")} onMouseEnter={handleMouseEnterCorrect} onMouseLeave={handleMouseLeaveCorrect} name="Correct Categories" stackId="feedback" dataKey="correctCount" fill={correctFill} />
-          <Bar onMouseOver={() => setCurrentTooltip("wrongCount")} onMouseEnter={handleMouseEnterWrong} onMouseLeave={handleMouseLeaveWrong} name="Wrong Categories" stackId="feedback" dataKey="wrongCount" fill={wrongFill} />
+          <Bar onMouseOver={() => setCurrentTooltip("correctCount")} onMouseEnter={handleMouseEnterCorrect} onMouseLeave={handleMouseLeaveCorrect} name={props.plural ? "Correct Categories" : "Correct Category"} stackId="feedback" dataKey="correctCount" fill={correctFill} />
+          <Bar onMouseOver={() => setCurrentTooltip("wrongCount")} onMouseEnter={handleMouseEnterWrong} onMouseLeave={handleMouseLeaveWrong} name={props.plural ? "Wrong Categories" : "Wrong Category"} stackId="feedback" dataKey="wrongCount" fill={wrongFill} />
           <Bar onMouseOver={() => setCurrentTooltip("noFeedbackCount")} onMouseEnter={handleMouseEnterNoFeedback} onMouseLeave={handleMouseLeaveNoFeedback} name="No Feedback" stackId="feedback" dataKey="noFeedbackCount" fill={noFeedbackFill} />
           <Bar onMouseOver={() => setCurrentTooltip("uploadCount")} onMouseEnter={handleMouseEnterTotal} onMouseLeave={handleMouseLeaveTotal} name="Total Uploads" dataKey="uploadCount" fill={totalFill} />
         </BarChart>

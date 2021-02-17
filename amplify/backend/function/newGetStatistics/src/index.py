@@ -13,7 +13,7 @@ def handler(event, context):
         users = body['users']
         print(users)
 
-        categories = ['Animal', 'Human', 'Car', 'Landscape', 'NOT_DEFINED']
+        categories = ['Overview', 'Animal', 'Human', 'Car', 'Landscape', 'NOT_DEFINED']
         
         responseBody = dict()
         for user in users:
@@ -21,15 +21,18 @@ def handler(event, context):
             userItem = table.get_item(Key={'user': user})
             print(userItem)
             responseBody[user] = dict()
-            responseBody[user]['uploadCount'] = userItem['Item']['stats']['uploadCount']
-            responseBody[user]['correctCount'] = userItem['Item']['stats']['correctCount']
-            responseBody[user]['wrongCount'] = userItem['Item']['stats']['wrongCount']
             for category in categories:
-                responseBody[user][category] = dict()
-                responseBody[user][category]['uploadCount'] = userItem['Item']['stats'][category]['uploadCount']
-                responseBody[user][category]['correctCount'] = userItem['Item']['stats'][category]['correctCount']
-                responseBody[user][category]['wrongCount'] = userItem['Item']['stats'][category]['wrongCount']
-            
+                try:
+                    responseBody[user][category] = dict()
+                    responseBody[user][category]['uploadCount'] = userItem['Item']['stats'][category]['uploadCount']
+                    responseBody[user][category]['correctCount'] = userItem['Item']['stats'][category]['correctCount']
+                    responseBody[user][category]['wrongCount'] = userItem['Item']['stats'][category]['wrongCount']
+                except:
+                    print("No data in db for:"+str(user))
+                    responseBody[user][category]['uploadCount'] = 0
+                    responseBody[user][category]['correctCount'] = 0
+                    responseBody[user][category]['wrongCount'] = 0
+
         print(responseBody)
 
         return {

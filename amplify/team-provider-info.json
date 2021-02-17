@@ -30,35 +30,35 @@
         },
         "amplifyCreateLabelAllocationItems": {
           "deploymentBucketName": "amplify-authcra-devt-82135-deployment",
-          "s3Key": "amplify-builds/amplifyCreateLabelAllocationItems-33684a3543765544564d-build.zip"
+          "s3Key": "amplify-builds/amplifyCreateLabelAllocationItems-355375592b5343315579-build.zip"
         },
         "writeStatsFunction": {
           "deploymentBucketName": "amplify-authcra-devt-82135-deployment",
-          "s3Key": "amplify-builds/writeStatsFunction-34784b79716742624a68-build.zip"
+          "s3Key": "amplify-builds/writeStatsFunction-344253507764742f6d65-build.zip"
         },
         "updateArchiveWithFeedback": {
           "deploymentBucketName": "amplify-authcra-devt-82135-deployment",
-          "s3Key": "amplify-builds/updateArchiveWithFeedback-78672f4a526b317a4a7a-build.zip"
+          "s3Key": "amplify-builds/updateArchiveWithFeedback-4e696935787a79723461-build.zip"
         },
         "updateArchiveWithCategory": {
           "deploymentBucketName": "amplify-authcra-devt-82135-deployment",
-          "s3Key": "amplify-builds/updateArchiveWithCategory-6f65484f47785a623730-build.zip"
+          "s3Key": "amplify-builds/updateArchiveWithCategory-4a336b494b43566a5855-build.zip"
         },
         "getStatistics": {
           "deploymentBucketName": "amplify-authcra-devt-82135-deployment",
-          "s3Key": "amplify-builds/getStatistics-48346744704679553055-build.zip"
+          "s3Key": "amplify-builds/getStatistics-6e736666394355514564-build.zip"
         },
         "sendEmail": {
           "deploymentBucketName": "amplify-authcra-devt-82135-deployment",
-          "s3Key": "amplify-builds/sendEmail-6e737774702b64597368-build.zip"
+          "s3Key": "amplify-builds/sendEmail-2f4447643243636a4564-build.zip"
         },
         "newUpdateArchiveWithFeedback": {
           "deploymentBucketName": "amplify-authcra-devt-82135-deployment",
-          "s3Key": "amplify-builds/newUpdateArchiveWithFeedback-6c534943764652503667-build.zip"
+          "s3Key": "amplify-builds/newUpdateArchiveWithFeedback-7354474e696135727970-build.zip"
         },
         "newGetStatistics": {
           "deploymentBucketName": "amplify-authcra-devt-82135-deployment",
-          "s3Key": "amplify-builds/newGetStatistics-326f5846585061583254-build.zip"
+          "s3Key": "amplify-builds/newGetStatistics-70633132365264676630-build.zip"
         }
       }
     }
